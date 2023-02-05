@@ -1,11 +1,11 @@
 import React from 'react'
 import "./index.css"
-function sales() {
+function Sales() {
   return (
     <div>
-    <h1>Sales</h1>
+    <h1>SALEs</h1>
     </div>
   )
 }
 
-export default sales
+export default Sales
