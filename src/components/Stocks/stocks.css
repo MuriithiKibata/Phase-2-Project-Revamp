@@ -1,0 +1,59 @@
+.pri-cont{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    
+    width: 100%;
+}
+
+.cont{
+    display: flex;
+    background-color: black;
+    position: relative;
+    top: 15rem;
+    justify-content: space-between;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    align-items: center;
+    gap: 10rem;
+    border-radius: 15px;
+
+}
+
+.headers {
+    display: flex;
+    gap: 5rem;
+}
+
+h2{
+    color: white;
+}
+
+.stock{
+    background-color: black;
+    top: 16rem;
+    position: relative;
+    display: flex;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    gap: 10rem;
+    border-radius: 15px;
+    
+}
+
+.controllers{
+    display : flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+.controllers button{
+    color: white;
+    background-color:#FC27B3;
+    width: 5rem;
+    padding: .4rem;
+    border-radius: 15px;
+    border: none;
+}

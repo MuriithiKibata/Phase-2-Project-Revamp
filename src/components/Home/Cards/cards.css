@@ -1,0 +1,34 @@
+.home-container{
+    /* background-color: black; */
+    max-width: fit-content;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin-top: 6rem;
+    /* align-self: center; */
+}
+
+.btn{
+    display: flex;
+    gap: 3rem;
+}
+
+.btn button{
+    width: 6.5rem;
+    padding: .5rem;
+    border-radius: 3rem;
+    border: none;
+    background-color: #FC27B3;
+    margin-top: 1rem;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    
+}
+
+
+
+
+
+
+
