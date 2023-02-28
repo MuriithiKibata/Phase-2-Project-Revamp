@@ -2,6 +2,7 @@ import React from 'react'
 import Reports from '../Reports/Reports'
 import './stocks.css'
 import NavBar from '../Navbar/nav'
+import Edit from './Edit'
 function Stocks() {
   return (
     <div className='pri-cont'>
@@ -28,6 +29,7 @@ function Stocks() {
                 <button className="button">Delete</button>
               </div>
             </div>
+            <Edit/>
         </div>
 
     // </div>
