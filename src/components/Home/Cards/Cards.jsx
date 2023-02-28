@@ -14,8 +14,8 @@ function Cards() {
         <Nav/>
         <img src={text} alt="text" />
         <div className="btn">
-        <button onClick={()=>navigate('/stocks')}>Stocks</button>
-        <button onClick={()=> navigate('/sales')}>Sales</button>
+        <button onClick={()=>navigate('/dashboard/stocks')}>Stocks</button>
+        <button onClick={()=> navigate('/dashboard/sales')}>Sales</button>
         </div>
         </div>
   )

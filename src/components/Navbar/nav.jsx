@@ -6,16 +6,16 @@ function nav() {
    
         <div className="container">
             <div className="items">
-              <Link to='/sales'> 
+              <Link to='/dashboard/sales'> 
                 <h3>Sales</h3>
               </Link>
-              <Link to='/stocks'>
+              <Link to='/dashboard/stocks'>
                 <h3>Stocks</h3>
                 </Link>
-                <Link to='/cart'>
+                <Link to='/dashboard/cart'>
                 <h3>Cart</h3>
                 </Link>
-                <Link to='/home'>
+                <Link to='/dashboard/home'>
                 <h3>Home</h3>
                 </Link>
             </div>
