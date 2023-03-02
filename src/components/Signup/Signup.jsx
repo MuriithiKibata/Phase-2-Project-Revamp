@@ -1,43 +1,115 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Loading from '../Loading Animation/Loading'
-import './signup.css'
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import Loading from "../Loading Animation/Loading";
+import "./signup.css";
+
 function Signup() {
-  let navigate = useNavigate()
-  function handleClick(e){
-    e.preventDefault()
-    setLoading(true)
-    setTimeout(()=>{
-      setLoading(false)
-      navigate('/dashboard/home')
-    },2000)
+  const { register, handleSubmit } = useForm();
+
+  const [userData, setUserData] = useState();
+
+  const [errors, setErrors] = useState();
+  let navigate = useNavigate();
+
+  async function onSubmit(data) {
+    setLoading(true);
+    const response = await fetch("/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    console.log(data);
+    const info = await response.json();
+    if (response.ok) {
+      setTimeout(() => {
+        setLoading(false);
+        navigate("/dashboard/home");
+      }, 2000);
+      setUserData(info);
+    } else {
+      setLoading(false);
+      setErrors(info.errors);
+    }
   }
-  const [loading, setLoading] = useState()
+
+  console.log(userData);
+  console.log(errors)
+  // async function handleSubmit(e) {
+  //   e.preventDefault()
+  //   fetch("/reviews", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(form ),
+
+  // })
+
+  // Const data = await response.json()
+  // if(response.ok){
+  // setForm(data)
+  // }else{
+  // setErrors(data.errors)
+  // }
+
+  const [loading, setLoading] = useState();
   return (
-    <form className="form-cont">
-     <form className="form">
-    <div className="title">Welcome</div>
-    <div className="subtitle">Login</div>
-    <div className="input-container ic1">
-      <input id="firstname" className="input" type="text" placeholder=" " />
-      <div className="cut"></div>
-      <label for="firstname" className="placeholder">Email</label>
+    <div className="form-cont">
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <div className="title">Welcome</div>
+        <div className="subtitle">Login</div>
+        <div className="input-container ic1">
+          <input
+            id="firstname"
+            className="input"
+            type="text"
+            placeholder=" "
+            {...register("email")}
+          />
+          <div className="cut"></div>
+          <label for="firstname" className="placeholder">
+            Email
+          </label>
+        </div>
+        <div className="input-container ic2">
+          <input
+            id="lastname"
+            className="input"
+            type="text"
+            placeholder=" "
+            {...register("password")}
+          />
+          <div className="cut"></div>
+          <label for="lastname" className="placeholder">
+            Password
+          </label>
+        </div>
+        <div className="input-container ic2">
+          <input
+            id="email"
+            className="input"
+            type="text"
+            placeholder=" "
+            {...register("password_confirmation")}
+          />
+          <div className="cut cut-short"></div>
+          <label for="email" className="placeholder">
+            Confirm Password{" "}
+          </label>
+        </div>
+        <button type="text" className="submit">
+          submit
+        </button>
+      </form>
+      {loading && <Loading />}
+      <ul className="error">
+        {errors && errors.map(item =>(
+          <li>{item}</li>
+        ))}
+      </ul>
     </div>
-    <div className="input-container ic2">
-      <input id="lastname" className="input" type="text" placeholder=" " />
-      <div className="cut"></div>
-      <label for="lastname" className="placeholder">Password</label>
-    </div>
-    <div className="input-container ic2">
-      <input id="email" className="input" type="text" placeholder=" " />
-      <div className="cut cut-short"></div>
-      <label for="email" className="placeholder">Confirm Password </label>
-    </div>
-    <button type="text" className="submit" onClick={handleClick}>submit</button>
-  </form>
-  {loading && <Loading/>}
-  </form>
-  )
+  );
 }
 
-export default Signup
+export default Signup;
