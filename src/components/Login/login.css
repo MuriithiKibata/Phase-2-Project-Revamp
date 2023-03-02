@@ -122,5 +122,15 @@
   .submit:active {
     background-color: #06b;
   }
+
+  .error {
+    color: red;
+    padding-left: 1rem;
+  }
+
+  .error li{
+    padding-left: 1rem;
+    list-style: none;
+  }
   
   

@@ -7,10 +7,9 @@ import "./signup.css";
 function Signup() {
   const { register, handleSubmit } = useForm();
 
-  const [userData, setUserData] = useState();
-
-  const [errors, setErrors] = useState();
-  let navigate = useNavigate();
+        const [userData, setUserData] = useState();  
+        const [errors, setErrors] = useState();
+        let navigate = useNavigate();
 
   async function onSubmit(data) {
     setLoading(true);
@@ -19,39 +18,27 @@ function Signup() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    console.log(data);
-    const info = await response.json();
+
+   const info = await response.json();
+
     if (response.ok) {
       setTimeout(() => {
         setLoading(false);
-        navigate("/dashboard/home");
+        // navigate("/dashboard/home");
       }, 2000);
       setUserData(info);
+      localStorage.setItem("token", info[1].token);
+
     } else {
       setLoading(false);
       setErrors(info.errors);
     }
   }
 
-  console.log(userData);
-  console.log(errors)
-  // async function handleSubmit(e) {
-  //   e.preventDefault()
-  //   fetch("/reviews", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(form ),
-
-  // })
-
-  // Const data = await response.json()
-  // if(response.ok){
-  // setForm(data)
-  // }else{
-  // setErrors(data.errors)
-  // }
+    console.log(userData);
+  
+    console.log(errors)
+ 
 
   const [loading, setLoading] = useState();
   return (
