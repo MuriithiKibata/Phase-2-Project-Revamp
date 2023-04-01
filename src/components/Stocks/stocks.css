@@ -56,4 +56,5 @@ h2{
     padding: .4rem;
     border-radius: 15px;
     border: none;
+    cursor: pointer;
 }

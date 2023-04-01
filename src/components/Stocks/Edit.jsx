@@ -1,9 +1,12 @@
 import React from 'react'
 import './edit.css'
-function Edit() {
+function Edit({setEditModal}) {
+  function handleClick(e){
+   e.preventDefault() 
+  }
   return (
     <div className='edit-wrapper'>
-        <form className="form-wrapper">
+        <form className="form-wrapper"onClick={handleClick}>
         <div className="input-wrapper">
             <label>Item</label>
             <input type="text" />
@@ -12,7 +15,7 @@ function Edit() {
             <label>Price</label>
             <input type="number" />
             <div className="btn-wrapper">
-                <button>Exit</button>
+                <button onClick={() => setEditModal(false)}>Exit</button>
                 <button>Submit</button>
             </div>
         </div>

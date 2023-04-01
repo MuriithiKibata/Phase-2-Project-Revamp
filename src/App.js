@@ -7,6 +7,8 @@ import Cards from './components/Home/Cards/Cards';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import Loading from './components/Loading Animation/Loading';
+import StocksContextProvider from './Contexts/Stocks-context';
+
 
 function App() {
 
@@ -14,6 +16,7 @@ function App() {
   
   return (
     <BrowserRouter>
+    <StocksContextProvider>
     <Routes>
       <Route path='/loader' element={<Loading />}/>
       <Route path='/signup' element={<Signup />}/>
@@ -24,6 +27,7 @@ function App() {
      <Route path='home' element={<Cards/>}/>
      </Route>
     </Routes>
+    </StocksContextProvider>
     </BrowserRouter>
   );
 }
