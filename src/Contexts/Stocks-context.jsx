@@ -4,8 +4,7 @@ export const StocksContext = createContext(null);
 
 function StocksContextProvider(props) {
   let token = localStorage.getItem("token");
-  let userId = localStorage.getItem("storeId")
- 
+  let userId = localStorage.getItem("storeId");
 
   const [stocks, setStocks] = useState([]);
   function getStocks() {
@@ -16,9 +15,9 @@ function StocksContextProvider(props) {
     })
       .then((res) => res.json())
       .then((res) => {
-        setStocks(res.items)
+        setStocks(res.items);
         localStorage.setItem("storeId", res.stores[0].id);
-    });
+      });
   }
 
   const contextvalues = { getStocks, setStocks, stocks };

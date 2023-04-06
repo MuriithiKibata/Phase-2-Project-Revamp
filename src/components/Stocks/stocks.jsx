@@ -4,15 +4,86 @@ import Reports from '../Reports/Reports'
 import './stocks.css'
 import NavBar from '../Navbar/nav'
 import Edit from './Edit'
+import {DataGrid} from '@mui/x-data-grid'
 import { StocksContext } from '../../Contexts/Stocks-context'
+import { Button } from '@mui/material'
 function Stocks() {
   const [editModal, setEditModal] = useState(false)
+  const [getId, setId] = useState()
+  const {getStocks, stocks} = useContext(StocksContext)
 
-  const {getStocks, setStocks, stocks} = useContext(StocksContext)
+  const renderDetailsButton = (params) => {
+    return (
+        <strong>
+            <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                onClick={() =>{
+                  setEditModal(true)
+                }}
+             
+            >
+                Edit
+            </Button>
+        </strong>
+    )
+}
 
+function renderCartButton(){
+  return (
+    <strong>
+      <Button
+      variant="contained"
+      size="small"
+      color="primary"
+      >
+        Cart
+      </Button>
+    </strong>
+  )
+}
+
+function renderDeleteButton(){
+  return (
+    <strong>
+      <Button
+      variant="contained"
+      color="primary"
+      size="small"
+      >
+        Delete
+      </Button>
+    </strong>
+  )
+}
+
+  const colums = [
+    {field: 'id', headerName: 'ID', width: 200},
+    {field: 'name', headerName: 'Name', width: 200},
+    {field: 'price', headerName: 'Price', width: 200},
+    {field: 'quantity', headerName: 'Quantity', width: 200},
+    {field: "Edit",
+    renderCell: renderDetailsButton,
+    disableClickEventBubbling: true,
+  },
+  {field: "Cart",
+    renderCell: renderCartButton,
+    disableClickEventBubbling: true,
+  },
+  {field: "Delete",
+    renderCell: renderDeleteButton,
+    disableClickEventBubbling: true,
+  },
+
+  ];
+
+  
   useEffect(() =>{
     getStocks()
   }, [])
+  console.log(getId)
+  
 
   console.log(stocks)
   
@@ -22,40 +93,14 @@ function Stocks() {
       
       <NavBar/>
       <Reports/>
-        <div className="cont">
-          <div className="headers"><h2>Item</h2></div>
-          <div className="headers"><h2>Quantity</h2></div>
-          <div className="headers"><h2>Price</h2></div>
-          <div className="headers">
-            <h2>Edit</h2>
-            <h2>Cart</h2>
-            <h2>Delete</h2>
-          </div>
-          {/* {errors && errors.map(item =>(
-          <li>{item}</li>
-        ))} */}
-        </div>
-        {stocks && stocks.map((item) =>(
-        <div className="stock">
-          
-       
-              <div><h2>{item.name}</h2></div>
-              <div><h2>{item.quantity}</h2></div>
-              <div><h2>{item.price}</h2></div>
-              
-              <div className='controllers'>
-                <button className="button" onClick={()=> setEditModal(true)}>Edit</button>
-                <button className="button">Cart</button>
-                <button className="button">Delete</button>
-              </div>
-              
-            </div>
-))}
-            
-           {editModal && <Edit setEditModal={setEditModal}/>}
-        </div>
+     
+           <div className="cont">
+           
+          <DataGrid rows = {stocks} columns = {colums} autoHeight checkboxSelection onRowClick={(rows)=> setId(rows.id)}/>
 
-    // </div>
+        </div>
+        {editModal && <Edit setEditModal={setEditModal} getId ={getId}/>}
+     </div>
   )
 }
 
