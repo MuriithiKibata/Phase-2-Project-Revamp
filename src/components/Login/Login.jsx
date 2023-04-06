@@ -19,10 +19,12 @@ function Login() {
       body: JSON.stringify(data)
     })
     const info = await response.json()
-    if(response.ok) {
+    if (response.ok) {
       setLoading(true)
       setUserData(info)
-      localStorage.setItem("token", info[1].token);
+      localStorage.setItem("token", info[1].jwt);
+      console.log(info)
+      localStorage.setItem("ownerId", info[0].stores[0].id)
       setTimeout(() => {
         setLoading(false)
         navigate('/dashboard/home')
@@ -34,7 +36,7 @@ function Login() {
     
    
   }
-
+  
 
   return (
     <div className="form-cont">

@@ -27,7 +27,7 @@ function Signup() {
         // navigate("/dashboard/home");
       }, 2000);
       setUserData(info);
-      localStorage.setItem("token", info[1].token);
+      localStorage.setItem("token", info[1].jwt);
 
     } else {
       setLoading(false);

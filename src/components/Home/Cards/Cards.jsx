@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 
 import './cards.css'
@@ -6,7 +6,27 @@ import Nav from '../../Navbar/nav';
 import text from '../text.svg'
 import { useNavigate } from 'react-router-dom';
 function Cards() {
-   
+   const token = localStorage.getItem('token')
+  const [userProfile, setUserProfile] = useState()
+
+  async function fetchProfile(){
+    const response = await fetch("/profile",{
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    const data = await response.json()
+    setUserProfile(data)
+    localStorage.setItem("storeId", data.stores[0].id)
+  }
+
+  
+  
+
+   useEffect(() =>{
+    fetchProfile()
+   }, [])
+  
   const navigate = useNavigate() 
   return (
     
