@@ -3,8 +3,10 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    min-height: fit-content;
+   
     width: 100%;
+
+   
     
 }
 
@@ -43,7 +45,7 @@ th{
 
 .stock{
     background-color: black;
-    top: 16rem;
+    /* top: 16rem; */
     position: relative;
     display: flex;
     padding-left: 1rem;
@@ -52,7 +54,7 @@ th{
     border-radius: 15px;
     min-width: fit-content;
     margin-bottom: 1rem;
-   max-height: inherit;
+    max-height: inherit;
     
     
 }
