@@ -1,12 +1,15 @@
 import React, {useState} from "react";
 import "./CartAmount.css";
-import { Button } from "@mui/material";
 function CartAmount({setCartAmountModal, getId}) {
     const authToken = localStorage.getItem("token");
     const [input, setInputData] = useState({
         id: getId,
         amount: ""
     })
+
+    function closeModal() {
+      setCartAmountModal(false)
+    }
 
     function addToCart() {
        
@@ -38,8 +41,7 @@ function CartAmount({setCartAmountModal, getId}) {
    async function handleSubmit(e){
         e.preventDefault();
        Promise.all([
-        addToCart(), handleDecrement()
-       ])
+        addToCart(), handleDecrement(), closeModal()])
     }
 
   return (
@@ -48,7 +50,7 @@ function CartAmount({setCartAmountModal, getId}) {
         <label>Enter Amount</label>
         <input type="number" className="cartAmountInput" onChange={(e) => setInputData({...input, amount: e.target.value}) } />
         <div className="cartAmountButtons">
-          <button onClick={() => setCartAmountModal(false)} >Close</button>
+          <button onClick={closeModal} >Close</button>
           <button>Submit</button>
         </div>
       </form>

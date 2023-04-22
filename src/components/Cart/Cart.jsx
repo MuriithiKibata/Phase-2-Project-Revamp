@@ -1,5 +1,6 @@
 import React from "react";
 import NavBar from "../Navbar/nav";
+import { Button } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -40,7 +41,7 @@ function Cart() {
         alignItems="center"
         margin="auto"
         flexWrap="wrap"
-        paddingTop="100px"
+        paddingTop="90px"
       >
         {getCartItems &&
           getCartItems.map((item) => (
@@ -61,9 +62,12 @@ function Cart() {
                   </Typography>
                 </CardContent>
               </CardActionArea>
+              <Button color="secondary" size="small" variant="contained" sx={{margin: 1}}>Quantity</Button>
+              <Button color="secondary" size="small" variant="contained" sx={{margin: 1}}>Delete</Button>
             </Card>
           ))}
       </Box>
+      <div className="subTotal"><h1>Total: 160000</h1></div>
     </>
   );
 }
