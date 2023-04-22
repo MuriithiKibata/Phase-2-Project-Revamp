@@ -6,8 +6,10 @@ import Stocks from './components/Stocks/Stocks';
 import Cards from './components/Home/Cards/Cards';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
+import Cart from './components/Cart/Cart';
 import Loading from './components/Loading Animation/Loading';
 import StocksContextProvider from './Contexts/Stocks-context';
+import CartContextProvider from './Contexts/CartContext';
 
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
       <Route path='/' element={<Login />}/>
       <Route path='/dashboard' element={<Home />}>
       <Route path='stocks' element={<Stocks/>}/>
+      <Route path='cart' element = {<Cart/>}></Route>
       <Route path='sales' element={<Sales/>}/>
      <Route path='home' element={<Cards/>}/>
      </Route>

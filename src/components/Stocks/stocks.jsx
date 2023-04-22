@@ -7,9 +7,11 @@ import Edit from './Edit'
 import {DataGrid} from '@mui/x-data-grid'
 import { StocksContext } from '../../Contexts/Stocks-context'
 import { Button } from '@mui/material'
+import CartAmount from './CartAmount'
 function Stocks() {
   const [editModal, setEditModal] = useState(false)
   const [getId, setId] = useState()
+  const [openCartAmountModal, setCartAmountModal] = useState(false)
   const {getStocks, stocks} = useContext(StocksContext)
 
   const renderDetailsButton = (params) => {
@@ -17,7 +19,7 @@ function Stocks() {
         <strong>
             <Button
                 variant="contained"
-                color="primary"
+                color="secondary"
                 size="small"
                 onClick={() =>{
                   setEditModal(true)
@@ -36,9 +38,12 @@ function renderCartButton(){
       <Button
       variant="contained"
       size="small"
-      color="primary"
+      color="secondary"
+      onClick={() =>{
+        setCartAmountModal(true)
+      }}
       >
-        Cart
+      Cart
       </Button>
     </strong>
   )
@@ -49,7 +54,7 @@ function renderDeleteButton(){
     <strong>
       <Button
       variant="contained"
-      color="primary"
+      color="secondary"
       size="small"
       >
         Delete
@@ -100,6 +105,7 @@ function renderDeleteButton(){
 
         </div>
         {editModal && <Edit setEditModal={setEditModal} getId ={getId}/>}
+        {openCartAmountModal && <CartAmount setCartAmountModal = {setCartAmountModal} getId = {getId}/>}
      </div>
   )
 }

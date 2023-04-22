@@ -1,0 +1,52 @@
+.CartAmountWrapper{
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+}
+
+.cartAmountForm{
+    background-color: #001B3A;
+    width: 20%;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+}
+
+.cartAmountForm label{
+    margin-bottom: 1rem;
+    font-size: larger;
+    color: white;
+}
+
+.cartAmountForm input{
+    padding: .5rem;
+}
+
+.cartAmountButtons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: .5rem;
+}
+
+.cartAmountButtons button{
+    background-color: #FC27B3;
+    border: none;
+    padding: .5rem;
+    border-radius: 5px;
+    color: white;
+ 
+}
+
+
+
