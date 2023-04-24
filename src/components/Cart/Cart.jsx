@@ -15,6 +15,7 @@ function Cart() {
 
   // const {getCartItems, getUsersCart} = useContext(CartContext)
   const [getCartItems, setCartItems] = useState();
+  const [subtotal, setSubTotal] = useState();
 
   async function getUsersCart() {
     const response = await fetch("/carts", {
@@ -25,8 +26,45 @@ function Cart() {
     const data = await response.json();
     setCartItems(data);
   }
+
+  async function getSubtotal(){
+    const data = await fetch('/subtotal', {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    })
+    const response = await data.json();
+    setSubTotal(response)
+  }
+
+  function clearItem(id) {
+    fetch(`/carts/${id}`,{
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${authToken}`
+      }
+    })
+    setCartItems(cartItem => getCartItems.filter((item) => item.id != id))
+    getSubtotal()
+  }
+
+  function handleDelete(id) {
+    Promise.all([clearItem(id), getSubtotal()])
+  }
+
+  function clearCart() {
+    fetch(`/clearcart`, {
+      headers: {
+        Authorization: `Bearer ${authToken}`
+      }
+    })
+    Promise.all([setCartItems([]), getSubtotal()])
+  }
+
+
   useEffect(() => {
     getUsersCart();
+    getSubtotal()
   }, []);
 
   return (
@@ -62,12 +100,13 @@ function Cart() {
                   </Typography>
                 </CardContent>
               </CardActionArea>
-              <Button color="secondary" size="small" variant="contained" sx={{margin: 1}}>Quantity</Button>
-              <Button color="secondary" size="small" variant="contained" sx={{margin: 1}}>Delete</Button>
+              <Button color="secondary" size="small" variant="contained" sx={{margin: 1}} onClick={() => handleDelete(item.id)}>
+                Delete
+              </Button>
             </Card>
           ))}
       </Box>
-      <div className="subTotal"><h1>Total: 160000</h1></div>
+      <div className="subTotal"><h1>Total: {subtotal}/=</h1><Button variant = "contained" color = "secondary" size = "large" maxWidth = "sm" onClick = {clearCart}>Checkout</Button></div>
     </>
   );
 }
