@@ -9,7 +9,7 @@ import Signup from './components/Signup/Signup';
 import Cart from './components/Cart/Cart';
 import Loading from './components/Loading Animation/Loading';
 import StocksContextProvider from './Contexts/Stocks-context';
-import CartContextProvider from './Contexts/CartContext';
+
 
 
 function App() {

@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import { StocksContext } from '../../Contexts/Stocks-context'
 import "./CartAmount.css";
 function CartAmount({setCartAmountModal, getId}) {
     const authToken = localStorage.getItem("token");
@@ -6,6 +7,8 @@ function CartAmount({setCartAmountModal, getId}) {
         id: getId,
         amount: ""
     })
+
+    const {getStocks, stocks} = useContext(StocksContext)
 
     function closeModal() {
       setCartAmountModal(false)
@@ -41,7 +44,7 @@ function CartAmount({setCartAmountModal, getId}) {
    async function handleSubmit(e){
         e.preventDefault();
        Promise.all([
-        addToCart(), handleDecrement(), closeModal()])
+        addToCart(), handleDecrement(), closeModal(), getStocks()])
     }
 
   return (
