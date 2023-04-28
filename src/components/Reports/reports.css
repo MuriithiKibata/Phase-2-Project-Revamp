@@ -2,9 +2,14 @@
     width: 100vw;
     /* background-color: black; */
     position: relative;
-    top: 10rem;
+    top: 4rem;
     display: flex;
     gap: 5rem;
+    flex-direction: column;
+}
+
+.sub-cont{
+    display: flex;
 }
 
 .report-card{

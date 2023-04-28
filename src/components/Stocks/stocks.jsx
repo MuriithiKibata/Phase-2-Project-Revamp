@@ -8,11 +8,13 @@ import {DataGrid} from '@mui/x-data-grid'
 import { StocksContext } from '../../Contexts/Stocks-context'
 import { Button } from '@mui/material'
 import CartAmount from './CartAmount'
+import Create from './Create'
 function Stocks() {
   const [editModal, setEditModal] = useState(false)
   const [getId, setId] = useState()
   const [openCartAmountModal, setCartAmountModal] = useState(false)
-  const {getStocks, stocks} = useContext(StocksContext)
+  const [openCreateModal, setOpenCreateModal] = useState(false)
+  const {getStocks, stocks, setStocks, handleDelete} = useContext(StocksContext)
 
   const renderDetailsButton = (params) => {
     return (
@@ -56,12 +58,15 @@ function renderDeleteButton(){
       variant="contained"
       color="secondary"
       size="small"
+      onClick={() => {handleDelete(getId)}}
       >
         Delete
       </Button>
     </strong>
   )
 }
+
+  
 
   const colums = [
     {field: 'id', headerName: 'ID', width: 200},
@@ -87,7 +92,9 @@ function renderDeleteButton(){
   useEffect(() =>{
     getStocks()
   }, [])
-  console.log(getId)
+
+ 
+  
   
 
   console.log(stocks)
@@ -97,13 +104,17 @@ function renderDeleteButton(){
     <div className='pri-cont'>
       
       <NavBar/>
-      <Reports/>
+      <Reports setOpenCreateModal =  {setOpenCreateModal}/>
      
            <div className="cont">
            
-          <DataGrid rows = {stocks} columns = {colums} autoHeight checkboxSelection onRowClick={(rows)=> setId(rows.id)}/>
+          <DataGrid rows = {stocks} columns = {colums} autoHeight  onRowClick={(rows)=> 
+            {setId(rows.id)
+            localStorage.setItem("itemId", rows.id)
+          }}/>
 
         </div>
+         {openCreateModal && <Create setOpenCreateModal = {setOpenCreateModal}/>}
         {editModal && <Edit setEditModal={setEditModal} getId ={getId}/>}
         {openCartAmountModal && <CartAmount setCartAmountModal = {setCartAmountModal} getId = {getId}/>}
      </div>

@@ -9,13 +9,19 @@ import { CardActionArea } from "@mui/material";
 import { Box } from "@mui/material";
 import "./Cart.css";
 import image from "./Stocks-manager-card-bg .jpeg";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 function Cart() {
   const authToken = localStorage.getItem("token");
 
   // const {getCartItems, getUsersCart} = useContext(CartContext)
   const [getCartItems, setCartItems] = useState();
   const [subtotal, setSubTotal] = useState();
+  const [getId, setId] = useState();
+  const [itemAmount, setItemAmount] = useState({
+    amount: ""
+  });
+
+  
 
   async function getUsersCart() {
     const response = await fetch("/carts", {
@@ -44,9 +50,22 @@ function Cart() {
         Authorization: `Bearer ${authToken}`
       }
     })
-    setCartItems(cartItem => getCartItems.filter((item) => item.id != id))
+    setCartItems(cartItem => getCartItems.filter((item) => item.id !== id))
     getSubtotal()
   }
+
+  function returnItems(id) {
+    fetch(`/items/increment/${id}`,{
+      method: "PATCH",
+      headers:{
+        Authorization : `Bearer ${authToken}`, 
+        'Content-Type': 'application/json'
+      },
+      body : JSON.stringify(itemAmount)
+    })
+    console.log(id)
+  }
+
 
   function handleDelete(id) {
     Promise.all([clearItem(id), getSubtotal()])
@@ -58,7 +77,7 @@ function Cart() {
         Authorization: `Bearer ${authToken}`
       }
     })
-    Promise.all([setCartItems([]), getSubtotal()])
+    Promise.all([setCartItems([]), getSubtotal(), returnItems()])
   }
 
 
@@ -100,7 +119,11 @@ function Cart() {
                   </Typography>
                 </CardContent>
               </CardActionArea>
-              <Button color="secondary" size="small" variant="contained" sx={{margin: 1}} onClick={() => handleDelete(item.id)}>
+              <Button color="secondary" size="small" variant="contained" sx={{margin: 1}} onClick={() => 
+              {handleDelete(item.id)
+              setItemAmount({...itemAmount, amount: item.quantity}) 
+              returnItems(item.item_id)
+              }}>
                 Delete
               </Button>
             </Card>
