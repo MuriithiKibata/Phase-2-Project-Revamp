@@ -20,7 +20,6 @@ function App() {
     <BrowserRouter>
     <StocksContextProvider>
     <Routes>
-      <Route path='/loader' element={<Loading />}/>
       <Route path='/signup' element={<Signup />}/>
       <Route path='/' element={<Login />}/>
       <Route path='/dashboard' element={<Home />}>

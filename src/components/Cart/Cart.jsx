@@ -12,11 +12,8 @@ import image from "./Stocks-manager-card-bg .jpeg";
 import { useEffect, useState } from "react";
 function Cart() {
   const authToken = localStorage.getItem("token");
-
-  // const {getCartItems, getUsersCart} = useContext(CartContext)
   const [getCartItems, setCartItems] = useState();
   const [subtotal, setSubTotal] = useState();
-  const [getId, setId] = useState();
   const [itemAmount, setItemAmount] = useState({
     amount: ""
   });
@@ -86,6 +83,8 @@ function Cart() {
     getSubtotal()
   }, []);
 
+  // console.log(getCartItems.length)
+  // let cartLength = getCartItems.length
   return (
     <>
       <NavBar />

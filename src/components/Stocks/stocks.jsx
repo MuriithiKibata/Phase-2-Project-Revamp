@@ -14,7 +14,7 @@ function Stocks() {
   const [getId, setId] = useState()
   const [openCartAmountModal, setCartAmountModal] = useState(false)
   const [openCreateModal, setOpenCreateModal] = useState(false)
-  const {getStocks, stocks, setStocks, handleDelete} = useContext(StocksContext)
+  const {getStocks, stocks, handleDelete} = useContext(StocksContext)
 
   const renderDetailsButton = (params) => {
     return (
