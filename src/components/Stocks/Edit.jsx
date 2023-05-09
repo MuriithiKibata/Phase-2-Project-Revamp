@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, {useContext } from "react";
 import "./edit.css";
 import { useForm } from "react-hook-form";
 import { StocksContext } from "../../Contexts/Stocks-context";

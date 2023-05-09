@@ -22,9 +22,10 @@ function Nav() {
                 <Link to='/dashboard/home'>
                 <h3>Home</h3>
                 </Link>
-            </div> <div className="cartIcon"><Button variant='contained' size = 'small' color = 'secondary' onClick={() => {
+            </div> <div className="cartIcon"><Button variant='contained' size = 'small' color = 'secondary' onClick={() => 
+            {
               navigate('/')
-              localStorage.clear()
+              window.localStorage.clear()
             }}>Logout</Button></div>
            
         </div>

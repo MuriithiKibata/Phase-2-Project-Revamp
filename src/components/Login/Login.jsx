@@ -23,14 +23,11 @@ function Login() {
       setLoading(true)
       setUserData(info)
       localStorage.setItem("token", info[1].jwt);
-      console.log(info)
-      localStorage.setItem("ownerId", info[0].stores[0].id)
       setTimeout(() => {
         setLoading(false)
         navigate('/dashboard/home')
       }, 2000)
     } else {
-     
       setErrors(info.errors)
     }
     

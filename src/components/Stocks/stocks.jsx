@@ -15,7 +15,8 @@ function Stocks() {
   const [openCartAmountModal, setCartAmountModal] = useState(false)
   const [openCreateModal, setOpenCreateModal] = useState(false)
   const {getStocks, stocks, handleDelete} = useContext(StocksContext)
-
+  const [store_Id, setStoreId] = useState()
+  const token = localStorage.getItem('token')
   const renderDetailsButton = (params) => {
     return (
         <strong>
@@ -88,9 +89,23 @@ function renderDeleteButton(){
 
   ];
 
+  async function fetchProfile(){
+    const response = await fetch("/profile",{
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    const data = await response.json()
+    console.log(data.stores[0].id)
+    setStoreId(data.stores[0].id)
+  }
+
+  
+  console.log(store_Id)
   
   useEffect(() =>{
     getStocks()
+    fetchProfile()
   }, [])
 
  
@@ -108,13 +123,13 @@ function renderDeleteButton(){
      
            <div className="cont">
            
-          <DataGrid rows = {stocks} columns = {colums} autoHeight  onRowClick={(rows)=> 
+          <DataGrid rows = {stocks ?? []} columns = {colums} autoHeight  onRowClick={(rows)=> 
             {setId(rows.id)
             localStorage.setItem("itemId", rows.id)
           }}/>
 
         </div>
-         {openCreateModal && <Create setOpenCreateModal = {setOpenCreateModal}/>}
+         {openCreateModal && <Create setOpenCreateModal = {setOpenCreateModal} storeId = {store_Id}/>}
         {editModal && <Edit setEditModal={setEditModal} getId ={getId}/>}
         {openCartAmountModal && <CartAmount setCartAmountModal = {setCartAmountModal} getId = {getId}/>}
      </div>

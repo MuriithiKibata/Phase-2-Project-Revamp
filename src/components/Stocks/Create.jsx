@@ -1,10 +1,8 @@
 import React, { useContext, useState } from "react";
 import "./create.css";
 import { StocksContext } from "../../Contexts/Stocks-context";
-function Create({ setOpenCreateModal }) {
-  let storeId = localStorage.getItem("storeId");
+function Create({ setOpenCreateModal, storeId}) {
   let authToken = localStorage.getItem("token");
-
   const {getStocks} = useContext(StocksContext)
 
   const [inputState, setInputState] = useState({

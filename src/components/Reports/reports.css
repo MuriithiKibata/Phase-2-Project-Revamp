@@ -2,35 +2,14 @@
     width: 100vw;
     /* background-color: black; */
     position: relative;
-    top: 4rem;
+    top: 1rem;
     display: flex;
     gap: 5rem;
     flex-direction: column;
-}
-
-.sub-cont{
-    display: flex;
-}
-
-.report-card{
-    background-color: black;
-    width: 30%;
-    display: flex;
-    margin-left: 1rem;
-    margin-right: 1rem;
-   
     
 }
 
-.txt{
-    width: 80%;
-    display: flex;
-    gap: 2rem;
-    
+.add-cont{
+ margin-left: 4rem;
 }
 
-.txt h1{
-    margin-left: 1rem;
-    color: white;
- 
-}

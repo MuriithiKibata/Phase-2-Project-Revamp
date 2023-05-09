@@ -14,15 +14,16 @@
 }
 
 .btn button{
-    width: 6.5rem;
+    width: 20%;
     padding: .5rem;
-    border-radius: 3rem;
+    border-radius: 1rem;
     border: none;
     background-color: #FC27B3;
     margin-top: 1rem;
     color: white;
     font-weight: bold;
     font-size: large;
+    cursor: pointer;
     
 }
 

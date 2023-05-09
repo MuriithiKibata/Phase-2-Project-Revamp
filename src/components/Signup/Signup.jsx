@@ -24,20 +24,17 @@ function Signup() {
     if (response.ok) {
       setTimeout(() => {
         setLoading(false);
-        // navigate("/dashboard/home");
+        navigate("/dashboard/createstore");
       }, 2000);
       setUserData(info);
-      localStorage.setItem("token", info[1].jwt);
-
+      localStorage.setItem("token", info[1].token);
+      console.log(info[1].token);
     } else {
       setLoading(false);
       setErrors(info.errors);
     }
   }
 
-    console.log(userData);
-  
-    console.log(errors)
  
 
   const [loading, setLoading] = useState();
