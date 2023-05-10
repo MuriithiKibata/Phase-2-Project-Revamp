@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { useState } from 'react'
+import { useState} from 'react'
 import Reports from '../Reports/Reports'
 import './stocks.css'
 import NavBar from '../Navbar/nav'
@@ -8,12 +8,15 @@ import {DataGrid} from '@mui/x-data-grid'
 import { StocksContext } from '../../Contexts/Stocks-context'
 import { Button } from '@mui/material'
 import CartAmount from './CartAmount'
+import Create from './Create'
 function Stocks() {
   const [editModal, setEditModal] = useState(false)
   const [getId, setId] = useState()
   const [openCartAmountModal, setCartAmountModal] = useState(false)
-  const {getStocks, stocks} = useContext(StocksContext)
-
+  const [openCreateModal, setOpenCreateModal] = useState(false)
+  const {getStocks, stocks, handleDelete} = useContext(StocksContext)
+  const [store_Id, setStoreId] = useState()
+  const token = localStorage.getItem('token')
   const renderDetailsButton = (params) => {
     return (
         <strong>
@@ -56,12 +59,15 @@ function renderDeleteButton(){
       variant="contained"
       color="secondary"
       size="small"
+      onClick={() => {handleDelete(getId)}}
       >
         Delete
       </Button>
     </strong>
   )
 }
+
+  
 
   const colums = [
     {field: 'id', headerName: 'ID', width: 200},
@@ -83,11 +89,25 @@ function renderDeleteButton(){
 
   ];
 
+  async function fetchProfile(){
+    const response = await fetch("/profile",{
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    const data = await response.json()
+    setStoreId(data.stores[0].id)
+  }
+
+  
+ 
   
   useEffect(() =>{
     getStocks()
+    fetchProfile()
   }, [])
-  console.log(getId)
+
+
   
 
   console.log(stocks)
@@ -97,13 +117,17 @@ function renderDeleteButton(){
     <div className='pri-cont'>
       
       <NavBar/>
-      <Reports/>
+      <Reports setOpenCreateModal =  {setOpenCreateModal}/>
      
            <div className="cont">
            
-          <DataGrid rows = {stocks} columns = {colums} autoHeight checkboxSelection onRowClick={(rows)=> setId(rows.id)}/>
+          <DataGrid rows = {stocks ?? []} columns = {colums} autoHeight  onRowClick={(rows)=> 
+            {setId(rows.id)
+            localStorage.setItem("itemId", rows.id)
+          }}/>
 
         </div>
+         {openCreateModal && <Create setOpenCreateModal = {setOpenCreateModal} storeId = {store_Id}/>}
         {editModal && <Edit setEditModal={setEditModal} getId ={getId}/>}
         {openCartAmountModal && <CartAmount setCartAmountModal = {setCartAmountModal} getId = {getId}/>}
      </div>

@@ -1,0 +1,50 @@
+.create-wrapper{
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+
+}
+
+.create-form-wrapper{
+    background-color: #001B3A;
+    border-radius: 15px;
+}
+
+.create-input-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem;
+    gap: 1rem;
+}
+
+.create-input-wrapper input{
+    padding: .8rem;
+    
+}
+
+.create-input-wrapper label{
+    color: white;
+}
+
+
+.create-btn-wrapper{
+    display: flex;
+    gap: 5rem;
+}
+
+.create-btn-wrapper button{
+    width: 5rem;
+    color: white;
+    background-color:#FC27B3;
+    border: none;
+    padding: .5rem;
+    border-radius: 15px;
+}
