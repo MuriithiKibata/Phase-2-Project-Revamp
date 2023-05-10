@@ -14,6 +14,7 @@ function StocksContextProvider(props) {
     });
     const response = await data.json();
     setStocks(response);
+    console.log("I run")
   }
 
   function handleDelete(id) {

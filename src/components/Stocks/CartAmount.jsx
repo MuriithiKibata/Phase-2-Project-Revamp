@@ -24,27 +24,12 @@ function CartAmount({setCartAmountModal, getId}) {
             },
             body: JSON.stringify(input)
         })
-        .then(handleDecrement())
-
-    }
-
-     function handleDecrement(){
-      fetch(`/items/decrement/${getId}`,{
-            method: 'PATCH',
-            headers: {
-                Authorization: `Bearer ${authToken}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(input)
-        })
-
-        
     }
 
    async function handleSubmit(e){
         e.preventDefault();
        Promise.all([
-        addToCart(), handleDecrement(), closeModal(), getStocks()])
+        addToCart(), closeModal()])
     }
 
   return (

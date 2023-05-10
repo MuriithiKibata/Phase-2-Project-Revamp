@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { useState } from 'react'
+import { useState} from 'react'
 import Reports from '../Reports/Reports'
 import './stocks.css'
 import NavBar from '../Navbar/nav'
@@ -96,20 +96,18 @@ function renderDeleteButton(){
       }
     })
     const data = await response.json()
-    console.log(data.stores[0].id)
     setStoreId(data.stores[0].id)
   }
 
   
-  console.log(store_Id)
+ 
   
   useEffect(() =>{
     getStocks()
     fetchProfile()
   }, [])
 
- 
-  
+
   
 
   console.log(stocks)
